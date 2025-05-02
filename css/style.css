@@ -2,8 +2,41 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    color: white;
 }
 
 body {
     background-color: #262729;
 }
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.topContainer {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(207, 173, 51);
+}
+
+.bottomContainer {
+    background-color: aqua;
+}
+
+.unitContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.digits {
+    font-size: 8rem;
+}
+
+.hmsLabel {
+    font-size: 3rem;
+}
+
+
+
