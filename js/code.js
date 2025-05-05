@@ -11,5 +11,9 @@ let secondsCounter= 0; // Global variable to count seconds
 let intervalId= null; // Global variable and intentionally left empty
 
 
+selBtnPlay.addEventListener("click", startTimer);
 
+function startTimer() {
+    alert("I got click");
+}
 
