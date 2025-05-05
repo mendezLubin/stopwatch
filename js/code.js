@@ -26,3 +26,11 @@ function funcPause() {
     alert("I got click");
 }
 
+// RESET
+
+selBtnReset.addEventListener("click", funcReset);
+
+function funcReset() {
+    alert("I got click");
+}
+
