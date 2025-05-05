@@ -10,10 +10,19 @@ let selSecs= document.querySelector(".secs");
 let secondsCounter= 0; // Global variable to count seconds
 let intervalId= null; // Global variable and intentionally left empty
 
+//PLAY
 
-selBtnPlay.addEventListener("click", startTimer);
+selBtnPlay.addEventListener("click", funcStart);
 
-function startTimer() {
+function funcStart() {
+    alert("I got click");
+}
+
+//PAUSE
+
+selBtnPause.addEventListener("click", funcPause);
+
+function funcPause() {
     alert("I got click");
 }
 
