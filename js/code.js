@@ -37,5 +37,12 @@ function funcReset() {
 // SECONDS COUNTER
 function funcCount() {
     secondsCounter++; // Increases by 1
-    console.log(secondsCounter);
+    // console.log(secondsCounter);
+
+    // Calculation of hrs:min:sec
+    let secs = secondsCounter % 60; // Modulo 60 to always show the remainder divided by 60
+    let mins = Math.floor((secondsCounter % 3600) / 60); // Whole numbers only, no decimals
+    let hrs = Math.floor(secondsCounter / 3600); 
+
+    console.log(hrs + ":" + mins + ":" + secs);
 }
