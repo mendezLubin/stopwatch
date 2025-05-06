@@ -1,4 +1,3 @@
-// alert("conected");
 // SELECTIONS:
 let selBtnPlay= document.querySelector(".btnPlay");
 let selBtnPause= document.querySelector(".btnPause");
@@ -8,14 +7,15 @@ let selMins= document.querySelector(".mins");
 let selSecs= document.querySelector(".secs");
 
 let secondsCounter= 0; // Global variable to count seconds
-let intervalId= null; // Global variable and intentionally left empty
+// let intervalId= null; 
+// Global variable and intentionally left empty
 
 //PLAY
 
 selBtnPlay.addEventListener("click", funcStart);
 
 function funcStart() {
-    alert("I got click");
+    setInterval(funcCount, 1000); // Method that executes the function every 1000ms
 }
 
 //PAUSE
@@ -34,3 +34,8 @@ function funcReset() {
     alert("I got click");
 }
 
+// SECONDS COUNTER
+function funcCount() {
+    secondsCounter++; // Increases by 1
+    console.log(secondsCounter);
+}
