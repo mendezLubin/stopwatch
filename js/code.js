@@ -7,15 +7,18 @@ let selMins= document.querySelector(".mins");
 let selSecs= document.querySelector(".secs");
 
 let secondsCounter= 0; // Global variable to count seconds
-// let intervalId= null; 
-// Global variable and intentionally left empty
+let idInterval= null; // When there is no counting, no ID is generated — that's why it's initially set to null
 
 //PLAY
 
 selBtnPlay.addEventListener("click", funcStart);
 
 function funcStart() {
-    setInterval(funcCount, 1000); // Method that executes the function every 1000ms
+    // If the counter hasn't started yet, start it and store its ID so it can be stopped later using that ID with clearInterval(idInterval)
+    if (idInterval === null) {
+        idInterval = setInterval(funcCount, 1000); // Two things happen in this line of code: when this method is saved in a variable, it provides an ID number that gets stored, and at the same time, it starts calling the function every 1000ms
+        console.log("The id of the interval is: " + idInterval);
+    }
 }
 
 //PAUSE
