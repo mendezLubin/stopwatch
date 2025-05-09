@@ -23,7 +23,7 @@ function startCountIfNotRunning() {
 }
 
 function callFunctCountEverySecond() {
-    idInterval = setInterval(funcCount, 1000); // Two things happen in this line of code: when this method is saved in a variable, it provides an ID number that gets stored, and at the same time, it starts calling the function every 1000ms
+    idInterval= setInterval(funcCount, 1000); // Two things happen in this line of code: when this method is saved in a variable, it provides an ID number that gets stored, and at the same time, it starts calling the function every 1000ms
     console.log("The id of the interval is: " + idInterval);
 }
 
@@ -34,17 +34,17 @@ function funcCount() {
 
 function calculateHrsMinsSecs(count) {
     console.log(count);
-    let secs = count % 60;
-    let mins = Math.floor((count % 3600) / 60);
-    let hrs = Math.floor(count / 3600);
+    let secs= count % 60;
+    let mins= Math.floor((count % 3600) / 60);
+    let hrs= Math.floor(count / 3600);
     console.log(hrs + ":" + mins + ":" + secs);
     updateDisplay(hrs, mins, secs);
 }
 
 function updateDisplay(hrs, mins, secs) {
-    selSecs.textContent = secs.toString().padStart(2, "0");
-    selMins.textContent = mins.toString().padStart(2, "0");
-    selHrs.textContent = hrs.toString().padStart(2, "0");
+    selSecs.textContent= secs.toString().padStart(2, "0");
+    selMins.textContent= mins.toString().padStart(2, "0");
+    selHrs.textContent= hrs.toString().padStart(2, "0");
 }
 
 //PAUSE
@@ -52,7 +52,8 @@ function updateDisplay(hrs, mins, secs) {
 selBtnPause.addEventListener("click", funcPause);
 
 function funcPause() {
-    alert("I got click");
+    clearInterval(idInterval); // Detenemos el intervalo
+    idInterval= null; // importante para que podamos reanudar
 }
 
 // RESET
@@ -60,5 +61,6 @@ function funcPause() {
 selBtnReset.addEventListener("click", funcReset);
 
 function funcReset() {
+
     alert("I got click");
 }
