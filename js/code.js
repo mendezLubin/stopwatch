@@ -1,3 +1,12 @@
+/*
+This timer works by using setInterval(funcCount, 1000), which calls the function every 1000 milliseconds (1 second).
+Each time the function is call, the function increases the count variable by 1.
+When we store setInterval in a variable like: let idInterval = setInterval(funcCount, 1000);
+it gives an ID number (e.g. this might return 1) that we can later use to stop the interval with clearInterval(idInterval).
+Using just these two "setInterval" to play and "clearInterval" to stop, we can simulate a pause, because the count value is not reset, just temporarily stopped the function of increasing 1.
+To reset the timer completely, we reset the variable count to 0 and update the display to show "00:00:00".
+*/
+
 // SELECTIONS:
 let selBtnPlay= document.querySelector(".btnPlay");
 let selBtnPause= document.querySelector(".btnPause");
@@ -7,7 +16,11 @@ let selMins= document.querySelector(".mins");
 let selSecs= document.querySelector(".secs");
 
 let count= 0; // Global variable to count seconds
-let idInterval= null; // When there is no counting, no ID is generated — that's why it's initially set to null
+let idInterval= null; 
+/* This variable is necessary because when we use setInterval(funcCount, 1000) and store it in a variable, it returns an ID. To stop the interval later, we must pass that ID to clearInterval(id).For example: idInterval = setInterval(funcCount, 1000); might return 1, so we later call clearInterval(idInterval) to stop it. 
+
+When there is no counting, no ID is generated — that's why it's initially set to null
+*/
 
 //PLAY
 
@@ -45,16 +58,24 @@ function updateDisplay(hrs, mins, secs) {
     selSecs.textContent= secs.toString().padStart(2, "0");
     selMins.textContent= mins.toString().padStart(2, "0");
     selHrs.textContent= hrs.toString().padStart(2, "0");
+    /*padStart(2, "0") ensures the string has at least 2 digits. If the value is less than 2 digits, it adds a leading zero (e.g., "5" becomes "05"). 
+    It works only on strings, which is why the value is converted to a string before using padStart. */
 }
 
 //PAUSE
 
 selBtnPause.addEventListener("click", funcPause);
 
+/* There is no real "pause"—only play and stop. What we call "pause" still allows continuation because we don't reset the count variable. Even if we resume with a different interval ID, the count value remains unchanged. */
+
+// Play & store generated ID → idInterval = setInterval(funcCount, 1000);
+// Stop → clearInterval(idInterval);
+
 function funcPause() {
-    clearInterval(idInterval); // Detenemos el intervalo
-    idInterval= null; // importante para que podamos reanudar
-}
+    clearInterval(idInterval); // Stop the interval
+    idInterval= null; 
+    /* Set to null here because it allows the timer to be resumed later. In the condition if (idInterval === null), if idInterval is null, the function callFunctCountEverySecond() will be executed. If it is not null, the condition will not be true, and the function will not be called to continue the count. */
+    } 
 
 // RESET
 
@@ -62,5 +83,12 @@ selBtnReset.addEventListener("click", funcReset);
 
 function funcReset() {
 
-    alert("I got click");
+    clearInterval(idInterval); // Stop the interval (pause the timer)
+    idInterval= null; // Reset the interval ID so the timer can be started again
+    count= 0; // Reset the counter to zero
+
+    // Display "00:00:00" on screen:
+    selSecs.textContent= "00";
+    selMins.textContent= "00";
+    selHrs.textContent= "00";
 }
