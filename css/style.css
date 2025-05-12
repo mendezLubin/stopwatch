@@ -56,4 +56,14 @@ body {
     border-radius: 50%;
     border: none;
     background-color: rgb(147, 200, 200);
+    cursor: pointer;
+    transition: filter 300ms, transform 300ms;
+}
+
+.btnStopWatch:hover {
+    filter: brightness(0.8);
+}
+
+.btnStopWatch:active {
+  transform: translateY(1px);
 }
