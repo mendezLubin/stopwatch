@@ -17,7 +17,6 @@ body {
 .topContainer {
     display: flex;
     justify-content: center;
-    background-color: rgb(207, 173, 51);
 }
 
 
@@ -40,24 +39,32 @@ body {
 
 .bottomContainer {
     padding-top: 20px;
-    background-color: aqua;
     display: flex;
     justify-content: center;
     gap: 15px;
 }
 
 .icon {
-    /* fill: #000000; */
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
+}
+
+.iconReset {
+    fill: #feffff;
 }
 
 .btnStopWatch {
+    padding: 20px;
     border-radius: 50%;
-    border: none;
-    background-color: rgb(147, 200, 200);
+    border: solid #3b3c40 4px;
+    background-color: #333438;
     cursor: pointer;
     transition: filter 300ms, transform 300ms;
+}
+
+.btnPlay {
+    background-color: #4cc2ff;
+    border: none;
 }
 
 .btnStopWatch:hover {
@@ -67,3 +74,5 @@ body {
 .btnStopWatch:active {
   transform: translateY(1px);
 }
+
+
