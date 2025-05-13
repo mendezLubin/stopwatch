@@ -19,8 +19,6 @@ body {
     justify-content: center;
 }
 
-
-
 .unitContainer {
     display: flex;
     flex-direction: column;
@@ -74,5 +72,3 @@ body {
 .btnStopWatch:active {
   transform: translateY(1px);
 }
-
-
