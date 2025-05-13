@@ -12,6 +12,8 @@ body {
 .mainContainer {
     display: flex;
     flex-direction: column;
+    height: 100vh;
+    justify-content: center
 }
 
 .topContainer {
@@ -27,6 +29,7 @@ body {
 
 .digits {
     font-size: 8rem;
+    line-height: .75;
 }
 
 .hmsLabel {
@@ -43,8 +46,8 @@ body {
 }
 
 .icon {
-    width: 50px;
-    height: 50px;
+    width: 70%;
+    height: 70%; /* Make the icon scale to 70% of the button's size */
 }
 
 .iconReset {
@@ -52,8 +55,9 @@ body {
 }
 
 .btnStopWatch {
-    padding: 20px;
-    border-radius: 50%;
+    width: 80px;
+    height: 80px; /* Perfectly square button */
+    border-radius: 50%; /* Perfect circle button*/
     border: solid #3b3c40 4px;
     background-color: #333438;
     cursor: pointer;
@@ -72,3 +76,5 @@ body {
 .btnStopWatch:active {
   transform: translateY(1px);
 }
+
+

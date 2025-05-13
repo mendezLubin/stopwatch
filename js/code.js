@@ -15,8 +15,6 @@ let selHrs= document.querySelector(".hrs");
 let selMins= document.querySelector(".mins");
 let selSecs= document.querySelector(".secs");
 
-// VARIABLES:
-
 let count= 0; // Global variable to count seconds
 let idInterval= null; 
 /* This variable is necessary because when we use setInterval(funcCount, 1000) and store it in a variable, it returns an ID. To stop the interval later, we must pass that ID to clearInterval(id).For example: idInterval = setInterval(funcCount, 1000); might return 1, so we later call clearInterval(idInterval) to stop it. 
