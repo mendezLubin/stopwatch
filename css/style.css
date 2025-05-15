@@ -28,12 +28,12 @@ body {
 }
 
 .digits {
-    font-size: 8rem;
+    font-size: 5rem;
     line-height: .75;
 }
 
 .hmsLabel {
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 /* Stopwatch buttons */
@@ -55,8 +55,8 @@ body {
 }
 
 .btnStopWatch {
-    width: 80px;
-    height: 80px; /* Perfectly square button */
+    width: 60px;
+    height: 60px; /* Perfectly square button */
     border-radius: 50%; /* Perfect circle button*/
     border: solid #3b3c40 4px;
     background-color: #333438;
@@ -76,5 +76,23 @@ body {
 .btnStopWatch:active {
   transform: translateY(1px);
 }
+
+@media (min-width: 480px) {
+ 
+    .digits {
+    font-size: 8rem; 
+    }
+
+    .hmsLabel {
+    font-size: 3rem;
+    }
+
+    .btnStopWatch {
+    width: 80px;  
+    height: 80px;
+    }
+
+}
+
 
 
