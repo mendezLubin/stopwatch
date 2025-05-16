@@ -65,6 +65,7 @@ body {
     cursor: pointer;
     transition: filter 300ms, transform 300ms;
     user-select: none;
+    -webkit-tap-highlight-color: transparent; /* Removes the blue highlight that appears when tapping buttons on mobile browsers (especially on Chrome and Safari) */
 }
 
 .btnPlay {
