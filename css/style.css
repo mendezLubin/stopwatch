@@ -30,10 +30,12 @@ body {
 .digits {
     font-size: 5rem;
     line-height: .75;
+    user-select: none;
 }
 
 .hmsLabel {
     font-size: 2rem;
+    user-select: none;
 }
 
 /* Stopwatch buttons */
@@ -62,6 +64,7 @@ body {
     background-color: #333438;
     cursor: pointer;
     transition: filter 300ms, transform 300ms;
+    user-select: none;
 }
 
 .btnPlay {
