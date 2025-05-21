@@ -12,8 +12,16 @@ body {
 .mainContainer {
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    justify-content: center
+    justify-content: center;
+    height: calc(var(--vh, 1vh) * 100);
+    /* Need to use height: 100vh so the container fills the screen and centers the stopwatch. But 100vh causes issues on mobile, so I used a solution combining CSS and JS to fix it.
+    If I use height: 100vh, it works well on desktop and laptop devices, 
+    but not on mobile devices, because it causes unwanted scroll.
+    On mobile, 100vh includes the browser UI (like the address bar), 
+    which leads to layout issues.
+    This uses a custom CSS variable (--vh), set via JavaScript.
+    There is another piece of JS code that works together with this CSS 
+    to reflect the actual visible viewport height. */
 }
 
 .topContainer {

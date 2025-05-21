@@ -1,3 +1,18 @@
+/* Fixing mobile scroll
+Need to use height: 100vh so the container fills the screen and centers the stopwatch. But 100vh causes issues on mobile, so I used a solution combining CSS and JS to fix it.
+It's ideal to place this code at the very top of your JavaScript file,so it runs as early as possible when the page loads.
+This script calculates the actual viewport height and sets it as a CSS variable (--vh).
+It fixes the 100vh issue on mobile devices by excluding the browser UI (like the address bar).
+The --vh variable is then used in CSS to apply the correct height.
+This function runs on load and updates on window resize to keep the value accurate.
+*/
+function setVh() {
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty("--vh", vh + "px");
+}
+setVh();
+window.addEventListener("resize", setVh);
+
 /*
 This timer works by using setInterval(funcCount, 1000), which calls the function every 1000 milliseconds (1 second).
 Each time the function is call, the function increases the count variable by 1.
