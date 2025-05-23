@@ -36,17 +36,17 @@ body {
 }
 
 .digits {
-    font-size: 5rem;
+    font-size: 4rem;
     line-height: .75;
     user-select: none;
 }
 
 .cents {
-    font-size: 3rem; 
+    font-size: 2rem; 
 }
 
 .hmsLabel {
-    font-size: 2rem;
+    font-size: 1rem;
     user-select: none;
 }
 
@@ -93,10 +93,32 @@ body {
   transform: translateY(1px);
 }
 
-@media (min-width: 480px) {
+@media (min-width: 480px) and (max-width: 1023px) {
  
     .digits {
-    font-size: 8rem; 
+    font-size: 6.5rem; 
+    }
+
+    .cents {
+    font-size: 4rem;     
+    }
+
+    .hmsLabel {
+    font-size: 2rem;
+    }
+
+    .btnStopWatch {
+    width: 80px;  
+    height: 80px;
+    }
+
+}
+
+
+@media (min-width: 1024px) {
+ 
+    .digits {
+    font-size: 7.5rem; 
     }
 
     .cents {
@@ -108,11 +130,10 @@ body {
     }
 
     .btnStopWatch {
-    width: 80px;  
-    height: 80px;
+    width: 90px;  
+    height: 90px;
     }
 
 }
-
 
 
