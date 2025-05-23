@@ -41,6 +41,10 @@ body {
     user-select: none;
 }
 
+.cents {
+    font-size: 3rem; 
+}
+
 .hmsLabel {
     font-size: 2rem;
     user-select: none;
@@ -93,6 +97,10 @@ body {
  
     .digits {
     font-size: 8rem; 
+    }
+
+    .cents {
+    font-size: 5rem;     
     }
 
     .hmsLabel {
