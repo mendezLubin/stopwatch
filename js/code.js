@@ -29,8 +29,9 @@ let selBtnReset= document.querySelector(".btnReset");
 let selHrs= document.querySelector(".hrs");
 let selMins= document.querySelector(".mins");
 let selSecs= document.querySelector(".secs");
+let selCents= document.querySelector(".cents");
 
-let count= 0; // Global variable to count seconds
+let count= 0; // Global variable to count every hundredth of a second
 let idInterval= null; 
 /* This variable is necessary because when we use setInterval(funcCount, 1000) and store it in a variable, it returns an ID. To stop the interval later, we must pass that ID to clearInterval(id).For example: idInterval = setInterval(funcCount, 1000); might return 1, so we later call clearInterval(idInterval) to stop it. 
 
@@ -52,7 +53,7 @@ function startCountIfNotRunning() {
 }
 
 function callFunctCountEverySecond() {
-    idInterval= setInterval(funcCount, 1000); // Two things happen in this line of code: when this method is saved in a variable, it provides an ID number that gets stored, and at the same time, it starts calling the function every 1000ms
+    idInterval= setInterval(funcCount, 10); // Two things happen in this line of code: when this method is saved in a variable, it provides an ID number that gets stored, and at the same time, it starts calling the function every 1000ms
     console.log("The id of the interval is: " + idInterval);
 }
 
@@ -63,14 +64,17 @@ function funcCount() {
 
 function calculateHrsMinsSecs(count) {
     console.log(count);
-    let secs= count % 60;
-    let mins= Math.floor((count % 3600) / 60);
-    let hrs= Math.floor(count / 3600);
+    let totalSeconds= Math.floor(count/100);
+    let cents= count % 100;
+    let secs= totalSeconds % 60;
+    let mins= Math.floor((totalSeconds % 3600) / 60);
+    let hrs= Math.floor(totalSeconds / 3600);
     console.log(hrs + ":" + mins + ":" + secs);
-    updateDisplay(hrs, mins, secs);
+    updateDisplay(hrs, mins, secs, cents);
 }
 
-function updateDisplay(hrs, mins, secs) {
+function updateDisplay(hrs, mins, secs, cents) {
+    selCents.textContent= cents.toString().padStart(2, "0");
     selSecs.textContent= secs.toString().padStart(2, "0");
     selMins.textContent= mins.toString().padStart(2, "0");
     selHrs.textContent= hrs.toString().padStart(2, "0");
@@ -108,6 +112,7 @@ function funcReset() {
     selSecs.textContent= "00";
     selMins.textContent= "00";
     selHrs.textContent= "00";
+    selCents.textContent= "00";
 }
 
 function playClickSound() {
