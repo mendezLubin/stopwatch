@@ -47,7 +47,6 @@ function startCountIfNotRunning() {
     // If it's already running, idInterval will have a value. 
     // This prevents errors if the play button is pressed multiple times.
     if (idInterval === null) {
-        playClickSound(); // Play sound
         callFunctCountEverySecond();
     }
 }
@@ -92,7 +91,6 @@ selBtnPause.addEventListener("click", funcPause);
 // Stop → clearInterval(idInterval);
 
 function funcPause() {
-    playClickSound(); // Play sound
     clearInterval(idInterval); // Stop the interval
     idInterval= null; 
     /* Set to null here because it allows the timer to be resumed later. In the condition if (idInterval === null), if idInterval is null, the function callFunctCountEverySecond() will be executed. If it is not null, the condition will not be true, and the function will not be called to continue the count. */
@@ -103,7 +101,6 @@ function funcPause() {
 selBtnReset.addEventListener("click", funcReset);
 
 function funcReset() {
-    playClickSound(); // Play sound
     clearInterval(idInterval); // Stop the interval (pause the timer)
     idInterval= null; // Reset the interval ID so the timer can be started again
     count= 0; // Reset the counter to zero
@@ -115,7 +112,3 @@ function funcReset() {
     selCents.textContent= "00";
 }
 
-function playClickSound() {
-  const audio = new Audio("./assets/blopnew.mp3");
-  audio.play();
-}
