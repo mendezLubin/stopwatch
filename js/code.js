@@ -43,42 +43,42 @@ When there is no counting, no ID is generated — that's why it's initially set 
 selBtnPlay.addEventListener("click", startCountIfNotRunning);
 
 function startCountIfNotRunning() {
-    // If the counter hasn't started yet, idInterval will be null. 
-    // If it's already running, idInterval will have a value. 
-    // This prevents errors if the play button is pressed multiple times.
-    if (idInterval === null) {
-        callFunctCountEverySecond();
-    }
+  // If the counter hasn't started yet, idInterval will be null. 
+  // If it's already running, idInterval will have a value. 
+  // This prevents errors if the play button is pressed multiple times.
+  if (idInterval === null) {
+    callFunctCountEverySecond();
+  }
 }
 
 function callFunctCountEverySecond() {
-    idInterval= setInterval(funcCount, 10); // Two things happen in this line of code: when this method is saved in a variable, it provides an ID number that gets stored, and at the same time, it starts calling the function every 1000ms
-    console.log("The id of the interval is: " + idInterval);
+  idInterval= setInterval(funcCount, 10); // Two things happen in this line of code: when this method is saved in a variable, it provides an ID number that gets stored, and at the same time, it starts calling the function every 1000ms
+  console.log("The id of the interval is: " + idInterval);
 }
 
 function funcCount() {
-    count++; // Increases by 1
-    calculateHrsMinsSecs(count); //Calling funtion and paasing the count to calculate hrs-mins-secs
+  count++; // Increases by 1
+  calculateHrsMinsSecs(count); //Calling funtion and paasing the count to calculate hrs-mins-secs
 }
 
 function calculateHrsMinsSecs(count) {
-    console.log(count);
-    let totalSeconds= Math.floor(count/100);
-    let cents= count % 100;
-    let secs= totalSeconds % 60;
-    let mins= Math.floor((totalSeconds % 3600) / 60);
-    let hrs= Math.floor(totalSeconds / 3600);
-    console.log(hrs + ":" + mins + ":" + secs);
-    updateDisplay(hrs, mins, secs, cents);
+  console.log(count);
+  let totalSeconds= Math.floor(count/100);
+  let cents= count % 100;
+  let secs= totalSeconds % 60;
+  let mins= Math.floor((totalSeconds % 3600) / 60);
+  let hrs= Math.floor(totalSeconds / 3600);
+  console.log(hrs + ":" + mins + ":" + secs);
+  updateDisplay(hrs, mins, secs, cents);
 }
 
 function updateDisplay(hrs, mins, secs, cents) {
-    selCents.textContent= cents.toString().padStart(2, "0");
-    selSecs.textContent= secs.toString().padStart(2, "0");
-    selMins.textContent= mins.toString().padStart(2, "0");
-    selHrs.textContent= hrs.toString().padStart(2, "0");
-    /*padStart(2, "0") ensures the string has at least 2 digits. If the value is less than 2 digits, it adds a leading zero (e.g., "5" becomes "05"). 
-    It works only on strings, which is why the value is converted to a string before using padStart. */
+  selCents.textContent= cents.toString().padStart(2, "0");
+  selSecs.textContent= secs.toString().padStart(2, "0");
+  selMins.textContent= mins.toString().padStart(2, "0");
+  selHrs.textContent= hrs.toString().padStart(2, "0");
+  /*padStart(2, "0") ensures the string has at least 2 digits. If the value is less than 2 digits, it adds a leading zero (e.g., "5" becomes "05"). 
+  It works only on strings, which is why the value is converted to a string before using padStart. */
 }
 
 //PAUSE
@@ -91,24 +91,24 @@ selBtnPause.addEventListener("click", funcPause);
 // Stop → clearInterval(idInterval);
 
 function funcPause() {
-    clearInterval(idInterval); // Stop the interval
-    idInterval= null; 
-    /* Set to null here because it allows the timer to be resumed later. In the condition if (idInterval === null), if idInterval is null, the function callFunctCountEverySecond() will be executed. If it is not null, the condition will not be true, and the function will not be called to continue the count. */
-    } 
+  clearInterval(idInterval); // Stop the interval
+  idInterval= null; 
+  /* Set to null here because it allows the timer to be resumed later. In the condition if (idInterval === null), if idInterval is null, the function callFunctCountEverySecond() will be executed. If it is not null, the condition will not be true, and the function will not be called to continue the count. */
+} 
 
 // RESET
 
 selBtnReset.addEventListener("click", funcReset);
 
 function funcReset() {
-    clearInterval(idInterval); // Stop the interval (pause the timer)
-    idInterval= null; // Reset the interval ID so the timer can be started again
-    count= 0; // Reset the counter to zero
+  clearInterval(idInterval); // Stop the interval (pause the timer)
+  idInterval= null; // Reset the interval ID so the timer can be started again
+  count= 0; // Reset the counter to zero
 
-    // Display "00:00:00" on screen:
-    selSecs.textContent= "00";
-    selMins.textContent= "00";
-    selHrs.textContent= "00";
-    selCents.textContent= "00";
+  // Display "00:00:00" on screen:
+  selSecs.textContent= "00";
+  selMins.textContent= "00";
+  selHrs.textContent= "00";
+  selCents.textContent= "00";
 }
 
