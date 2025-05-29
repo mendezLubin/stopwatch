@@ -53,7 +53,6 @@ function startCountIfNotRunning() {
 
 function callFunctCountEverySecond() {
   idInterval= setInterval(funcCount, 10); // Two things happen in this line of code: when this method is saved in a variable, it provides an ID number that gets stored, and at the same time, it starts calling the function every 1000ms
-  console.log("The id of the interval is: " + idInterval);
 }
 
 function funcCount() {
@@ -62,13 +61,11 @@ function funcCount() {
 }
 
 function calculateHrsMinsSecs(count) {
-  console.log(count);
   let totalSeconds= Math.floor(count/100);
   let cents= count % 100;
   let secs= totalSeconds % 60;
   let mins= Math.floor((totalSeconds % 3600) / 60);
   let hrs= Math.floor(totalSeconds / 3600);
-  console.log(hrs + ":" + mins + ":" + secs);
   updateDisplay(hrs, mins, secs, cents);
 }
 
