@@ -14,12 +14,9 @@ setVh();
 window.addEventListener("resize", setVh);
 
 /*
-This timer works by using setInterval(funcCount, 1000), which calls the function every 1000 milliseconds (1 second).
-Each time the function is call, the function increases the count variable by 1.
-When we store setInterval in a variable like: let idInterval = setInterval(funcCount, 1000);
-it gives an ID number (e.g. this might return 1) that we can later use to stop the interval with clearInterval(idInterval).
-Using just these two "setInterval" to play and "clearInterval" to stop, we can simulate a pause, because the count value is not reset, just temporarily stopped the function of increasing 1.
-To reset the timer completely, we reset the variable count to 0 and update the display to show "00:00:00".
+This timer works more precisely than just using setInterval (which calls a function, e.g., every second to increase the count).  
+It works by consulting (e.g., every second using setInterval) the method performance.now() to check how much time has actually elapsed.  
+This way, we get accurate timing data.
 */
 
 // SELECTIONS:
@@ -33,6 +30,8 @@ let selCents= document.querySelector(".cents");
 
 let count= 0; // Global variable to count every hundredth of a second
 let idInterval= null; 
+let centisecondsUntilButtonWasPressed= null;
+
 /* This variable is necessary because when we use setInterval(funcCount, 1000) and store it in a variable, it returns an ID. To stop the interval later, we must pass that ID to clearInterval(id).For example: idInterval = setInterval(funcCount, 1000); might return 1, so we later call clearInterval(idInterval) to stop it. 
 
 When there is no counting, no ID is generated — that's why it's initially set to null
@@ -40,29 +39,35 @@ When there is no counting, no ID is generated — that's why it's initially set 
 
 //PLAY
 
-selBtnPlay.addEventListener("click", startCountIfNotRunning);
+selBtnPlay.addEventListener("click", funcVerifyIfStopWatchIsRunning);
 
-function startCountIfNotRunning() {
+function funcVerifyIfStopWatchIsRunning() {
   // If the counter hasn't started yet, idInterval will be null. 
   // If it's already running, idInterval will have a value. 
   // This prevents errors if the play button is pressed multiple times.
   if (idInterval === null) {
-    callFunctCountEverySecond();
+    funcCentisecondsUntilButtonWasPressed();
   }
 }
 
-function callFunctCountEverySecond() {
-  idInterval= setInterval(funcCount, 10); // Two things happen in this line of code: when this method is saved in a variable, it provides an ID number that gets stored, and at the same time, it starts calling the function every 1000ms
+function funcCentisecondsUntilButtonWasPressed() {
+    centisecondsUntilButtonWasPressed= performance.now();
+    console.log("Time to click: " + centisecondsUntilButtonWasPressed);
+    idInterval= setInterval(funcCheckTime, 10); // Two things happen in this line of code: when this method is saved in a variable, it provides an ID number that gets stored, and at the same time, it starts calling the function every 1000ms
 }
 
-function funcCount() {
-  count++; // Increases by 1
-  calculateHrsMinsSecs(count); //Calling funtion and paasing the count to calculate hrs-mins-secs
+function funcCheckTime() {
+  const now= performance.now();
+  const elapsed = now - centisecondsUntilButtonWasPressed;
+  // console.log("Elapsed: " + elapsed)
+  const elapsedCentisecondsRounded = Math.floor(elapsed / 10);
+  console.log(elapsedCentisecondsRounded);
+  calculateHrsMinsSecs(elapsedCentisecondsRounded);
 }
 
-function calculateHrsMinsSecs(count) {
-  let totalSeconds= Math.floor(count/100);
-  let cents= count % 100;
+function calculateHrsMinsSecs(elapsedCentisecondsRounded) {
+  let totalSeconds= Math.floor(elapsedCentisecondsRounded/100);
+  let cents= elapsedCentisecondsRounded % 100;
   let secs= totalSeconds % 60;
   let mins= Math.floor((totalSeconds % 3600) / 60);
   let hrs= Math.floor(totalSeconds / 3600);
@@ -90,7 +95,7 @@ selBtnPause.addEventListener("click", funcPause);
 function funcPause() {
   clearInterval(idInterval); // Stop the interval
   idInterval= null; 
-  /* Set to null here because it allows the timer to be resumed later. In the condition if (idInterval === null), if idInterval is null, the function callFunctCountEverySecond() will be executed. If it is not null, the condition will not be true, and the function will not be called to continue the count. */
+  /* Set to null here because it allows the timer to be resumed later. In the condition if (idInterval === null), if idInterval is null, the function consultTimeEveryCentisecond() will be executed. If it is not null, the condition will not be true, and the function will not be called to continue the count. */
 } 
 
 // RESET
