@@ -31,6 +31,7 @@ let selCents= document.querySelector(".cents");
 let count= 0; // Global variable to count every hundredth of a second
 let idInterval= null; 
 let centisecondsUntilButtonWasPressed= null;
+let accumulatedElapsed = 0; // For the use of pause
 
 /* This variable is necessary because when we use setInterval(funcCount, 1000) and store it in a variable, it returns an ID. To stop the interval later, we must pass that ID to clearInterval(id).For example: idInterval = setInterval(funcCount, 1000); might return 1, so we later call clearInterval(idInterval) to stop it. 
 
@@ -58,9 +59,9 @@ function funcCentisecondsUntilButtonWasPressed() {
 
 function funcCheckTime() {
   const now= performance.now();
-  const elapsed = now - centisecondsUntilButtonWasPressed;
+  const totalElapsed = accumulatedElapsed + (now - centisecondsUntilButtonWasPressed);
   // console.log("Elapsed: " + elapsed)
-  const elapsedCentisecondsRounded = Math.floor(elapsed / 10);
+  const elapsedCentisecondsRounded = Math.floor(totalElapsed / 10)
   console.log(elapsedCentisecondsRounded);
   calculateHrsMinsSecs(elapsedCentisecondsRounded);
 }
@@ -96,6 +97,7 @@ function funcPause() {
   clearInterval(idInterval); // Stop the interval
   idInterval= null; 
   /* Set to null here because it allows the timer to be resumed later. In the condition if (idInterval === null), if idInterval is null, the function consultTimeEveryCentisecond() will be executed. If it is not null, the condition will not be true, and the function will not be called to continue the count. */
+  accumulatedElapsed = accumulatedElapsed + (performance.now() - centisecondsUntilButtonWasPressed);
 } 
 
 // RESET
@@ -105,7 +107,7 @@ selBtnReset.addEventListener("click", funcReset);
 function funcReset() {
   clearInterval(idInterval); // Stop the interval (pause the timer)
   idInterval= null; // Reset the interval ID so the timer can be started again
-  count= 0; // Reset the counter to zero
+  accumulatedElapsed = 0;
 
   // Display "00:00:00" on screen:
   selSecs.textContent= "00";
