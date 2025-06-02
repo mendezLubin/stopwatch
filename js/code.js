@@ -84,6 +84,12 @@ function calculateHrsMinsSecs(totalElapsedCentSec) {
   let mins= Math.floor((seconds % 3600) / 60);
   let hrs= Math.floor(seconds / 3600);
   updateDisplay(hrs, mins, secs, cents);
+
+  // Stop the stopwatch when it reaches 99 hours to prevent overflow or excessively long timing.
+    if (hrs >= 99) {
+    clearInterval(idInterval);
+    idInterval = null;
+  }
 }
 
 function updateDisplay(hrs, mins, secs, cents) {
