@@ -36,8 +36,10 @@ let miliSecUntilButtonWasPressed= null; // To save the time elapsed between when
 let accumulatedElapsedInMiliSec = 0; // For the use of pause
 
 //PLAY
-
-selBtnPlay.addEventListener("click", funcVerifyIfStopWatchIsRunning);
+selBtnPlay.addEventListener("click", () => {
+  funcVerifyIfStopWatchIsRunning();
+  switchPlayPauseButtons(true); // Show only one button (Play or Pause) and disable the other for extra layer of safety
+});
 
 function funcVerifyIfStopWatchIsRunning() {
   // If the counter hasn't started yet, idInterval will be null. 
@@ -46,6 +48,29 @@ function funcVerifyIfStopWatchIsRunning() {
   if (idInterval === null) {
     funcSavemiliSecUntilButtonWasPressed();
     funcExecuteFuncEveryCentisecondAndSaveTheId(); //The id to stop it whe pressing pause
+  }
+}
+
+function switchPlayPauseButtons(isPlaying) {
+  //If true, show only PAUSE:
+  if (isPlaying) { 
+    // Hides and disables Play:
+    selBtnPlay.classList.add("hide"); 
+    selBtnPlay.disabled = true;
+
+    //Show and enable Pause:
+    selBtnPause.classList.remove("hide");
+    selBtnPause.disabled = false;
+
+  //If it is false, show only PLAY:
+  } else { 
+    // Show and enable Play:
+    selBtnPlay.classList.remove("hide");
+    selBtnPlay.disabled = false;
+
+    // Hide and disable Pause:
+    selBtnPause.classList.add("hide");
+    selBtnPause.disabled = true;
   }
 }
 
@@ -98,6 +123,11 @@ selBtnPause.addEventListener("click", funcPause);
 
 // Play & store generated ID → idInterval = setInterval(funcCount, 1000);
 // Stop → clearInterval(idInterval);
+
+selBtnPause.addEventListener("click", () => {
+  funcPause();
+  switchPlayPauseButtons(false); // Show only one button Play or Pause
+});
 
 function funcPause() {
   clearInterval(idInterval); // Stop the interval but does not erase de idInterval
