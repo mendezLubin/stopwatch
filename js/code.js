@@ -44,15 +44,6 @@ function funcVerifyIfStopWatchIsRunning() {
   // If it's already running, idInterval will have a value. 
   // This prevents errors if the play button is pressed multiple times.
   if (idInterval === null) {
-    // In case of error reset everything:
-    accumulatedElapsedInMiliSec = 0;
-    miliSecUntilButtonWasPressed = null;
-    // Display "00:00:00" on screen:
-    selSecs.textContent= "00";
-    selMins.textContent= "00";
-    selHrs.textContent= "00";
-    selCents.textContent= "00";
-
     funcSavemiliSecUntilButtonWasPressed();
     funcExecuteFuncEveryCentisecondAndSaveTheId(); //The id to stop it whe pressing pause
   }
@@ -109,8 +100,8 @@ selBtnPause.addEventListener("click", funcPause);
 // Stop → clearInterval(idInterval);
 
 function funcPause() {
-  clearInterval(idInterval); // Stop the interval
-  idInterval= null; 
+  clearInterval(idInterval); // Stop the interval but does not erase de idInterval
+  idInterval= null; // Erase de idInterval
   /* Set to null here because it allows the timer to be resumed later. In the condition if (idInterval === null), if idInterval is null, the function consultTimeEveryCentisecond() will be executed. If it is not null, the condition will not be true, and the function will not be called to continue. */
   accumulatedElapsedInMiliSec = accumulatedElapsedInMiliSec + (performance.now() - miliSecUntilButtonWasPressed);
 } 
