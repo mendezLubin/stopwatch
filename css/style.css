@@ -1,5 +1,5 @@
 @font-face {
-  font-family: "DroidSansMono";
+  font-family: "DroidSansMono", monospace;
   src: url("../assets/fonts/DroidSansMono.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
