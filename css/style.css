@@ -91,32 +91,33 @@ body {
   border-radius: 50%; /* Perfect circle button*/
   border: solid #3b3c40 4px;
   background-color: #333438;
-  cursor: pointer;
   transition: filter 300ms, transform 300ms;
   user-select: none;
   -webkit-tap-highlight-color: transparent; /* Removes the blue highlight that appears when tapping buttons on mobile browsers (especially on Chrome and Safari) */
 }
 
-#btnPlay {
+#btnPlay,
+#btnPause {
   background-color: #4cc2ff;
   border: none;
+  cursor: pointer;
+}
+
+.cursorPointer {
+  cursor: pointer;
 }
 
 .hide {
   display: none;
 }
 
-.btnStopWatch:hover {
+#btnPlay:hover,
+#btnPause:hover {
   filter: brightness(0.8);
 }
 
-.btnStopWatch:active {
-  transform: translateY(1px);
-}
-
-.btnStopWatch:focus {
-  outline: 2px solid #4cc2ff;
-  outline-offset: 2px;
+.unhighlighted {
+  filter: brightness(0.8);
 }
 
 /*Responsive Design */

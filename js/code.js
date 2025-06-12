@@ -35,10 +35,12 @@ When there is no counting, no ID is generated — that's why it's initially set 
 let miliSecUntilButtonWasPressed= null; // To save the time elapsed between when the page loaded and when the play button was pressed
 let accumulatedElapsedInMiliSec = 0; // For the use of pause
 
+selBtnReset.disabled = true; // Disable reset button from the beginning
+
 //PLAY
 selBtnPlay.addEventListener("click", () => {
   funcVerifyIfStopWatchIsRunning();
-  switchPlayPauseButtons(true); // Show only one button (Play or Pause) and disable the other for extra layer of safety
+  showOnlyPauseBtn();
 });
 
 function funcVerifyIfStopWatchIsRunning() {
@@ -48,30 +50,29 @@ function funcVerifyIfStopWatchIsRunning() {
   if (idInterval === null) {
     funcSavemiliSecUntilButtonWasPressed();
     funcExecuteFuncEveryCentisecondAndSaveTheId(); //The id to stop it whe pressing pause
+
+    activateResetBtn();
   }
 }
 
-function switchPlayPauseButtons(isPlaying) {
-  //If true, show only PAUSE:
-  if (isPlaying) { 
-    // Hides and disables Play:
-    selBtnPlay.classList.add("hide"); 
-    selBtnPlay.disabled = true;
+function showOnlyPlayBtn() {
+  // Show and enable Play:
+  selBtnPlay.classList.remove("hide");
+  selBtnPlay.disabled = false;
 
-    //Show and enable Pause:
-    selBtnPause.classList.remove("hide");
-    selBtnPause.disabled = false;
+  // Hide and disable Pause:
+  selBtnPause.classList.add("hide");
+  selBtnPause.disabled = true;
+}
 
-  //If it is false, show only PLAY:
-  } else { 
-    // Show and enable Play:
-    selBtnPlay.classList.remove("hide");
-    selBtnPlay.disabled = false;
+function showOnlyPauseBtn() {
+  //Show and enable Pause:
+  selBtnPause.classList.remove("hide");
+  selBtnPause.disabled = false;
 
-    // Hide and disable Pause:
-    selBtnPause.classList.add("hide");
-    selBtnPause.disabled = true;
-  }
+  // Hides and disables Play:
+  selBtnPlay.classList.add("hide");
+  selBtnPlay.disabled = true;
 }
 
 function funcSavemiliSecUntilButtonWasPressed() {
@@ -126,7 +127,7 @@ selBtnPause.addEventListener("click", funcPause);
 
 selBtnPause.addEventListener("click", () => {
   funcPause();
-  switchPlayPauseButtons(false); // Show only one button Play or Pause
+  showOnlyPlayBtn();
 });
 
 function funcPause() {
@@ -141,6 +142,7 @@ function funcPause() {
 selBtnReset.addEventListener("click", funcReset);
 
 function funcReset() {
+  selBtnReset.classList.remove("unhighlighted");
   clearInterval(idInterval); // Stop the interval (pause the timer)
   idInterval= null; // Reset the interval ID so the timer can be started again
   accumulatedElapsedInMiliSec = 0; // Reset to cero
@@ -151,5 +153,20 @@ function funcReset() {
   selMins.textContent= "00";
   selHrs.textContent= "00";
   selCents.textContent= "00";
+
+  deactivateResetBtn();
+  showOnlyPlayBtn();
 }
 
+function activateResetBtn() {
+  selBtnReset.disabled = false;
+  selBtnReset.classList.remove("unhighlighted");
+  selBtnReset.classList.add("cursorPointer");
+  
+}
+
+function deactivateResetBtn() {
+  selBtnReset.disabled = true;
+  selBtnReset.classList.add("unhighlighted");
+    selBtnReset.classList.remove("cursorPointer");
+}
