@@ -120,11 +120,6 @@ function updateDisplay(hrs, mins, secs, cents) {
 
 //PAUSE
 
-selBtnPause.addEventListener("click", funcPause);
-
-// Play & store generated ID → idInterval = setInterval(funcCount, 1000);
-// Stop → clearInterval(idInterval);
-
 selBtnPause.addEventListener("click", () => {
   funcPause();
   showOnlyPlayBtn();
@@ -133,15 +128,12 @@ selBtnPause.addEventListener("click", () => {
 function funcPause() {
   clearInterval(idInterval); // Stop the interval but does not erase de idInterval
   idInterval= null; // Erase de idInterval
-  /* Set to null here because it allows the timer to be resumed later. In the condition if (idInterval === null), if idInterval is null, the function consultTimeEveryCentisecond() will be executed. If it is not null, the condition will not be true, and the function will not be called to continue. */
+  /* Set to null so that the Play button can restart the timer correctly. */
   accumulatedElapsedInMiliSec = accumulatedElapsedInMiliSec + (performance.now() - miliSecUntilButtonWasPressed);
 } 
 
 // RESET
-
-selBtnReset.addEventListener("click", funcReset);
-
-function funcReset() {
+  selBtnReset.addEventListener("click", () => {
   selBtnReset.classList.remove("unhighlighted");
   clearInterval(idInterval); // Stop the interval (pause the timer)
   idInterval= null; // Reset the interval ID so the timer can be started again
@@ -156,13 +148,12 @@ function funcReset() {
 
   deactivateResetBtn();
   showOnlyPlayBtn();
-}
+});
 
 function activateResetBtn() {
   selBtnReset.disabled = false;
   selBtnReset.classList.remove("unhighlighted");
-  selBtnReset.classList.add("cursorPointer");
-  
+  selBtnReset.classList.add("cursorPointer"); 
 }
 
 function deactivateResetBtn() {
